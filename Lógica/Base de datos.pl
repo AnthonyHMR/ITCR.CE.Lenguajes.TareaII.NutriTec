@@ -1,0 +1,27 @@
+tiposdietas(d1, 'keto').
+tiposdietas(d2, 'proteica').
+tiposdietas(d3, 'vegetariana').
+tiposdietas(d4, 'alcalina').
+tiposdietas(d5, 'detox').
+nombredieta(s1,'dieta vegana').
+nombredieta(s2, 'dieta baja en grasas').
+nombredieta(s3, 'dieta alta en grasas').
+nombredieta(s4, 'dieta baja en azúcar').
+
+padedimientos(p1, 'dislipidemia', 'problemas de control de colesterol', 'dieta baja en grasas').
+padedimientos(p2, 'hipercolesterolemia', 'aumento en los niveles óptimos de colesterol en la sangre',s1).
+padecimientos(p3, 'diabetes','nivel de azúcar por encima de lo normal', 'dieta baja en azúcar').
+padecimientos(p4, 'sobrepeso', 'IMC por encima de lo recomendado', 'dieta baja en grasas').
+padecimientos(p5, 'desnutrición', 'IMC por debajo de lo recomendado', 'dieta alta en grasas').
+
+setnivel(X, 'inicial'):-X<3,!.
+setnivel(X, 'intermedio'):- X<5, !.
+setnivel(X, 'avanzado').
+
+nivelesactividad(Valor,Y):-
+    setnivel(Valor, Y).
+
+dietas(s3, d1, 3000, [p1, p2, p3, p4], [p5],['no hacer cardio'], ['trotar 3 días por semana','hacer campotraviesa']).
+
+consultatipodieta(Dcodigo, Tipo):-
+    dietas(_,Dcodigo,_,_,_,_,_), tiposdietas(Dcodigo, Tipo).
