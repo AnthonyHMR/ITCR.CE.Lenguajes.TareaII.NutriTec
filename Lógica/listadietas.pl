@@ -1,0 +1,30 @@
+detalledieta(detalle1, 'Desayuno:
+Muffins de huevo keto
+5 g cebolla bien picadas
+25 g chorizo, salami o tocineta ahumada cocida
+2 huevos
+1/3 cda. pesto rojo o pesto verde (opcional)
+sal y pimienta negra molida
+28 g  queso rallado
+Almuerzo:
+Bowl asiático de pollo con brócoli
+170 g muslos de pollo deshuesados en rodajas finas
+1/2 cda. aceite de oliva o aceite de coco
+1/4 cdta. pimienta negra molida
+1/4 cdta. ajo en polvo
+70 g brócoli cortado en trozos pequeños
+1/2 cda. salsa de soja tamari
+Cena:
+Hamburguesas crocantes de atún
+140 g atún en agua en lata, escurrido
+45 ml mayonesa o mayonesa vegana
+½ huevo grande
+½ cda. ajo en polvo
+½ cda. cebolla en polvo
+1/8 cdta. sal
+1/8 cdta. pimienta negra molida
+¾ cda. aceite de oliva
+Para servir
+½ (55 g) tomate en rodajas finas (de unos 110 g/ 4 oz cada uno)
+21 g (90 ml) verduras de hoja verde o lechuga
+1 cda. mayonesa').
