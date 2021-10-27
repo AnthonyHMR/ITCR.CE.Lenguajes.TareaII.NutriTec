@@ -6,10 +6,10 @@ tiposdietas(d4, 'alcalina').
 tiposdietas(d5, 'detox').
 nombredieta(s1,'dieta vegana').
 nombredieta(s2, 'dieta baja en grasas').
-nombredieta(s3, 'dieta alta en grasas').
+nombredieta(s3, 'dieta baja en carbohidratos').
 nombredieta(s4, 'dieta baja en azúcar').
 
-padecimientos(p1, 'dislipidemia', 'problemas de control de colesterol', s2).
+padecimientos(p1, 'dislipemia', 'problemas de control de colesterol', s2).
 padecimientos(p2, 'hipercolesterolemia', 'aumento en los niveles óptimos de colesterol en la sangre',s1).
 padecimientos(p3, 'diabetes','nivel de azúcar por encima de lo normal', s4).
 padecimientos(p4, 'sobrepeso', 'IMC por encima de lo recomendado', s2).
@@ -25,7 +25,12 @@ nivelesactividad(Valor,Y):-
 % dietas(codigo de dieta, codigo nombre dieta, lista padecimientos no
 % recomendados, lista padecimientos recomendados, actividades no
 % recomendadas, actividades recomendadas).
-dietas(s3, d1, 3000, [p1, p2, p3, p4], [p5],['no hacer cardio'], ['trotar 3 días por semana','hacer campotraviesa'], detalle1).
+dietas(s3, d1, 1200, [p1, p2, p3, p5], [p4],['no hacer cardio'], ['trotar 3 días por semana','hacer campotraviesa'], detalle1).
+dietas(s3, d1, 1300, [p1, p2, p3, p5], [p4],['no hacer cardio'], ['trotar 3 días por semana','hacer campotraviesa'], detalle2).
+dietas(s3, d1, 1500, [p1, p2, p3, p5], [p4],['no hacer cardio'], ['trotar 3 días por semana','hacer campotraviesa'], detalle3).
+
+
+
 
 consultatipodieta(Tipo):-
    tiposdietas(_, Tipo).
