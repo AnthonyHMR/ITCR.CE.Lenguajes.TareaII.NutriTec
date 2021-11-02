@@ -1,0 +1,12 @@
+oracion2(S0,S):-sintagma_nominal2(S0,S1),sintagma_verbal2(N2,S1,S).
+sintagma_nominal2(S0,S):-determinante2(N1,SX,S0,S1),nombre2(N1,SX,S1,S).
+sintagma_verbal2(N1,S0,S):-verbo2(N1,S0,S).
+sintagma_verbal2(N1,S0,S):-verbo2(N1,S0,S1),sintagma_nominal2(S1,S).
+determinante2(singular, masculino, [el|S],S).
+determinante2(singular, femenino,[la|S],S).
+nombre2(singular, masculino, [hombre|S],S).
+nombre2(plural, masculino,[hombres|S],S]).
+nombre2(singular, femenino, [manzana|S],S).
+verbo2(singular, [come|S],S).
+verbo2(singular, [come|S],S).
+verbo2(plural, [comen|S],S).
