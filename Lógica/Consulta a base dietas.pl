@@ -3,11 +3,11 @@
 nivelesactividad(Valor,Y):-
     setnivel(Valor, Y), write(Y).
 
-consultatipodieta(Tipo):-
-   tiposdietas(_, Tipo), write(Tipo).
+consultatipodieta(Tipo, Codigodieta):-
+   tiposdietas(Codigodieta, Tipo), write(Tipo).
 
-consultapadecimiento(Nombrepade):-
-    padecimientos(Codigopade, Nombrepade, _, _), write(Codigopade).
+consultapadecimiento(Nombrepade, Codigopade):-
+    padecimientos(Codigopade, Nombrepade, _, _), write(Codigopade), nl.
 
 consultadetalledieta(Codigo):-
     dietas(Codigo,_,_,_,_,_,_, Detalle),nombredieta(Codigo, Nombre), write(Nombre),
@@ -18,6 +18,13 @@ setnivel(Nivel, 'inicial'):-Nivel<3,!.
 setnivel(Nivel, 'intermedio'):- Nivel<5, !.
 setnivel(Nivel, 'avanzado').
 
+% Clausula para conocer si un codigo de padecimiento está en la lista de
+% padecimientos, ya sea recomendado o no recomendados.
+miembroPadecimiento(Pade, [Pade|_]).
+miembroPadecimiento(Pade, [_|Restopade]):-miembroPadecimiento(Pade, Restopade).
+
+% asigna el valor de calorías en la base de datos mas cercano al
+% ingresado por el usuario
 calorias_a_dieta(Calorias, Mascerca):-
     Rest is (Calorias-1200),
     Rest2 is (Calorias-1400),
@@ -45,6 +52,11 @@ calorias_a_dieta(Calorias, Mascerca):-
     Dif is abs(Rest),
     Odif is abs(Rest2), Dif > Odif,
     Mascerca is 2500.
+%Comprueba que una tipo de dieta sea valida para un padecimiento dado
+tipoDietaValida(Tipo, Pade):-
+    consultapadecimiento(Pade, Codigopade),nl,
+    consultatipodieta(Tipo, Codigodieta),
+    dietas(_, Codigodieta, _, PadeNoRec,_,_,_,_), not(miembroPadecimiento(Codigopade, PadeNoRec)).
 
 
 
