@@ -1,36 +1,48 @@
-:-include(Gramática/bnf.pl).
+:-include('../Gramática/bnf.pl').
 
 play:-
+    introduccion,
+    preguntas,
+    recomendacion.
+
+introduccion:-
     leer_frase(X),nl,
     oracion2(X,[]),
     write('Hola encantado de verlo mejorar su estilo de vida. Cuenteme ¿en qué lo puedo ayudar?'),nl,
     leer_frase(Y),nl,
-    %oracion2(Y,[]),
+    oracion2(Y,[]).
+
+preguntas:-
     write('Excelente iniciativa. Estamos para asesorarte en todo lo que necesites.
 ¿Tienes alguna enfermedad por la que ha iniciado este proceso?, ¿cual?'),nl,
-    leer_frase(X3),nl,
-    %oracion2(X3,[]),
+    leer_frase(X1),nl,
+    oracion2(X1,[]),
     write('¿Tienes pensado una cantidad específica de calorías diarias por consumir?'),nl,
-    leer_frase(X4),nl,
-    %oracion2(X4,[]),
+    leer_frase(X2),nl,
+    oracion2(X2,[]),
     write('¿Cuantas veces a la semana hace actividad física?'),nl,
-    leer_frase(X5),nl,
-    %oracion2(X5,[]),
+    leer_frase(X3),nl,
+    oracion2(X3,[]),
     write('¿Tienes un tipo de dieta que te gustaría realizar?'),nl,
-    leer_frase(X6),nl,
-    %oracion2(X6,[]),
+    leer_frase(X4),nl,
+    oracion2(X4,[]),
     write('¿Qué alimentos preferirías no consumir?'),nl,
-    leer_frase(X7),nl,
-    %oracion2(X7,[]),
+    leer_frase(X5),nl,
+    oracion2(X5,[]).
+
+recomendacion:-
     write('Puedes empezar con el siguiente plan alimenticio bajo en grasas.'),nl,
-    leer_frase(X8),nl.
-    %oracion2(X8,[]).
+    leer_frase(X),nl,
+    oracion2(X,[]).
+
 
 leer_frase(Palabras):-
     get0(Caracter),
     leer_resto(Caracter,Palabras).
 
 leer_resto(46,[]):-!.
+leer_resto(10,Palabras):-!,
+    leer_frase(Palabras).
 leer_resto(32,Palabras):-!,
     leer_frase(Palabras).
 leer_resto(Caracter,[Palabra|Palabras]):-
