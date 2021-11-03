@@ -67,11 +67,15 @@ Cena:
 -trozos de piña').
 detalledieta(detalle4, '
 Desayuno:
-1 vaso de jugo verde: 2 manzanas, 1 pepino, 1 hoja de col y 1 pequeño trozo de jengibre batidos en la batidora.
+1 vaso de jugo verde: 2 manzanas, 1 pepino, 1 hoja de col y
+1 pequeño trozo de jengibre batidos en la batidora.
 1 banano machacado con un plato de salvado de avena.
 
 Merienda:
-1 pequeño tazón de ensalada de frutas: frutas sugeridas: pera, plátano, manzana, mango, kiwi, mandarina, piña, mango, + 1 cucharada de pasas de uva cereza y ciruela + 1 cucharada de semillas de lino dorado.
+1 pequeño tazón de ensalada de frutas: frutas sugeridas:
+pera, plátano, manzana, mango, kiwi, mandarina, piña, mango,
+1 cucharada de pasas de uva cereza y ciruela
+1 cucharada de semillas de lino dorado.
 
 Almuerzo:
 1 plato con ensalada verde: lechuga, repollo crudo, cebolla, apio y champiñón.

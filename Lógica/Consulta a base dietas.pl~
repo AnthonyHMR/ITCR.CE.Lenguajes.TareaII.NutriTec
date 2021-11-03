@@ -73,7 +73,7 @@ recomiendaActividad(Nivel, ListaActividades):-
 validarDieta(Padecimiento, Calorias, Actividad, Tipodieta):-
     Padecimiento = no, Calorias = no, Actividad = no, Tipodieta = no,
     dietas(s1, _,_,_,_,_,_, Detalle), write('Para empezar le recomiendo la dieta: '),
-    consultanombredieta(s1, Nombre), write(Nombre),nl, consultadetalledieta(Detalle),!.
+    consultanombredieta(s1, Nombre), write(Nombre),nl, consultadetalledieta(Detalle), nl,!.
 
 validarDieta(Padecimiento, Calorias, Actividad, Tipodieta):-
     Calorias = no, Actividad = no, Tipodieta = no,

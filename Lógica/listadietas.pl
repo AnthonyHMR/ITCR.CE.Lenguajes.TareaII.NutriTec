@@ -1,3 +1,9 @@
+%Base de datos para las recomendaciones de dietas.
+%detalledieta(Detalle, Recomendacion):
+%Tabla de detalles de dietas para la base de datos.
+%Detalle: codigo del detalle de dieta.
+%Recomendacion: Menu para recomendar
+
 detalledieta(detalle1, '
 Desayuno:
 Muffins de huevo keto
