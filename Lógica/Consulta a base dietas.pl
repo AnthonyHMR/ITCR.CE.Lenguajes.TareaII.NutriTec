@@ -54,26 +54,52 @@ calorias_a_dieta(Calorias, Mascerca):-
     Dif is abs(Rest),
     Odif is abs(Rest2), Dif > Odif,
     Mascerca is 2500.
+
+escribirActividades([]).
+escribirActividades([Act|Actividades]):-write(Act), nl, escribirActividades(Actividades).
+
+recomiendaActividad(Nivel, ListaActividades):-
+    Nivel='intermedio',
+    write('Ademas le recomiendo hacer estas actividades físicas: '), nl,
+    escribirActividades(ListaActividades).
+recomiendaActividad(Nivel, ListaActividades):-
+    Nivel='inicial',
+    write('Ademas le recomiendo hacer estas actividades físicas: '), nl,
+    escribirActividades(ListaActividades).
+
 %Comprueba que una tipo de dieta sea valida para un padecimiento dado
 %
+validarDieta(Padecimiento, Calorias, Actividad, Tipodieta):-
+    Padecimiento = no, Calorias = no, Actividad = no, Tipodieta = no,
+    dietas(s1, _,_,_,_,_,_, Detalle), write('Para empezar le recomiendo la dieta: '),
+    consultanombredieta(s1, Nombre), write(Nombre),nl, consultadetalledieta(Detalle),!.
+
 
 validarDieta(Padecimiento, Calorias, Actividad, Tipodieta):-
     Calorias = no, Actividad = no, Tipodieta = no,
     consultapadecimiento(Padecimiento, Codigopade),
     consultaRecomend(Codigopade,Codigodieta),
     dietas(Codigodieta,_, _,_,_,_,_,Detalle),
-    write('Le recomiendo la dieta: '), nl, consultadetalledieta(Detalle),!.
+    write('Le recomiendo la dieta: '),
+    consultanombredieta(Codigodieta, Nombre),write(Nombre),nl,
+    consultadetalledieta(Detalle),!.
 
 validarDieta(Padecimiento, Calorias, Actividad, Tipodieta):-
     Calorias = no, Actividad = no,
-    consultapadecimiento(Padecimiento, Codigopade),nl,
-    consultadetalledieta(Detalle).
+    consultapadecimiento(Padecimiento, Codigopade),
+    consultatipodieta(Tipodieta, Codigodieta),
+    dietas(Codigonombre, Codigodieta, _, PadeNoRec,_,_,_,Detalle), not(miembroPadecimiento(Codigopade, PadeNoRec)),
+    write('Le recomiendo la dieta: '),
+    consultanombredieta(Codigonombre, Nombre),write(Nombre), nl, consultadetalledieta(Detalle),!.
 
 validarDieta(Padecimiento, Calorias, Actividad, Tipodieta):-
-    Padecimiento = no, Calorias = no, Actividad = no, Tipodieta = no,
-    dietas(s1, _,_,_,_,_,_, Detalle), write('Para empezar le recomiendo la dieta '),
-    consultanombredieta(s1, Nombre), write(Nombre),nl, consultadetalledieta(Detalle).
-
-
-
+    consultapadecimiento(Padecimiento, Codigopade),
+    calorias_a_dieta(Calorias, Mascerca),
+    nivelesactividad(Actividad, Nivel),
+    consultatipodieta(Tipodieta, Codigodieta),
+    dietas(Codigonombre,Codigodieta,Mascerca,PadeNoRec,_,_,Actividades,Detalle), not(miembroPadecimiento(Codigopade, PadeNoRec)),
+    write('Para empezar le recomiendo la dieta: '),
+    consultanombredieta(Codigonombre, Nombre), write(Nombre),nl, consultadetalledieta(Detalle),
+    nl,nl, write('Tambien le recomiendo hacer algunas de estas actividades: '), nl,
+    recomiendaActividad(Nivel,Actividades).
 

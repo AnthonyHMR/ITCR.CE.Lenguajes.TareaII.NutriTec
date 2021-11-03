@@ -30,7 +30,7 @@ dietas(s2, d2, 1600,[p1, p2, p5, p4], [p3], ['No hacer ejercicios de alto esfuer
 dietas(s3, d3, 1400,[p1, p2, p5, p4], [p3], ['No hacer ejercicios de alto esfuerzo y corta duracion'], ['Practicar natacion', 'Hacer Senderismo'], detalle3).
 dietas(s4, d4,1200, [p5, p3], [p1, p2, p4], [''], ['Ejercicios de cardio'],detalle4).
 dietas(s5, d5, 1600, [p5], [p1, p2, p3, p4], ['Evitar fondos', 'Evitar cardio'], ['Actividad fisica de poco esfuerzo'], detalle5).
-dietas(s6, d6, 3000,[p1, p2, p3, p4], [p5], [''], ['Practicar deportes de conjunto', 'Natación', 'Campo traviesa', 'Correr'], detalle6).
+dietas(s6, d6, 2500,[p1, p2, p3, p4], [p5], [''], ['Practicar deportes de conjunto', 'Natación', 'Campo traviesa', 'Correr'], detalle6).
 
 test:-
     read(X), X='Hola Nutritec', write('Bienvenido, encantado de que verle mejorar su estilo de vida. Cuénteme ¿en qué le puedo ayudar?'),

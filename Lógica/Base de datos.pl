@@ -22,7 +22,7 @@ padecimientos(p5, desnutrición, 'IMC por debajo de lo recomendado', s6).
 % dietas(codigo de dieta, codigo nombre dieta, lista padecimientos no
 % recomendados, lista padecimientos recomendados, actividades no
 % recomendadas, actividades recomendadas).
-%
+%prueba: diabetes, 1550 cal, intermedio, proteica
 
 dietas(s1, d1, 1800, [p3,p4, p5], [p1, p2],['no hacer fondo'], ['trotar 15min. 3 días por semana','hacer 15min campotraviesa'], detalle1).
 dietas(s2, d2, 1600,[p1, p2, p5, p4], [p3], ['No hacer ejercicios de alto esfuerzo y corta duracion'], ['Practicar natacion', 'Hacer Senderismo'], detalle2).
