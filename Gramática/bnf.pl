@@ -1,4 +1,5 @@
 oracion2(S0,S):-sintagma_nominal2(S0,S1,N),sintagma_verbal2(S1,S,N),!.
+oracion2(S0,S):-sintagma_nominal2(S0,S,N),!.
 oracion2(S0,S):-sintagma_verbal2(S0,S,N),!.
 oracion2(S0,S):-sintagma_verbal2(S0,S1,N),conjuncion(S1,S2),oracion2(S2,S),!.
 oracion2(S0,S):-negacion(S0,S),!.
@@ -7,16 +8,26 @@ oracion2(S0,S):-afirmacion(S0,S),!.
 oracion2(S0,S):-afirmacion(S0,S1),oracion2(S1,S),!.
 oracion2(S0,S):-agradecimiento(S0,S),!.
 oracion2(S0,S):-agradecimiento(S0,S1),oracion2(S1,S),!.
+oracion2(S0,S):-saludo(S0,S),!.
 oracion2(S0,S):-numero(S0,S).
+
+saludo([hola|S],S).
+saludo([buenas|S],S).
+saludo([buenos,dias|S],S).
+saludo([buenas,tardes|S],S).
+saludo([buenas,noches|S],S).
 
 negacion([no|S],S).
 negacion([jamás|S],S).
 negacion([nunca|S],S).
 
-afirmacion([sí|S],S).
+afirmacion([si|S],S).
 afirmacion([en,efecto|S],S).
 afirmacion([claro|S],S).
+afirmacion([por,supuesto|S],S).
 
+agradecimiento([muchas,gracias|S],S).
+agradecimiento([ok,gracias|S],S).
 agradecimiento([gracias|S],S).
 agradecimiento([lo,aprecio|S],S).
 agradecimiento([lo,agradezco|S],S).
@@ -27,6 +38,7 @@ sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),nombre2(S1,S,N,SX),!.
 sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),nombre2(S1,S2,N,SX),adjetivo(S2,S),!.
 sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),numero(S1,S2),nombre2(S2,S,N,SX),!.
 sintagma_nominal2(S0,S,N):-numero(S0,S1),tiempo1(S1,S2),tiempo2(S2,S),!.
+sintagma_nominal2(S0,S,N):-adjetivo(S0,S),!.
 sintagma_nominal2(S0,S,N):-enfermedad(S0,S),!.
 sintagma_nominal2(S0,S,N):-pronombrePersonal(S0,S,N),!.
 sintagma_nominal2(S0,S,N):-pronombreReflex(S0,S,N),!.
@@ -51,6 +63,7 @@ pronombreIndet([a,un|S],S,singular,masc).
 pronombreIndet([unos|S],S,plural,masc).
 pronombreIndet([una|S],S,singular,fem).
 pronombreIndet([unas|S],S,plural,fem).
+pronombreIndet([al|S],S,singular,masc).
 
 determinante2([el|S],S,singular,masc).
 determinante2([la|S],S,singular,fem).
@@ -88,12 +101,25 @@ adjetivo([saludable|S],S).
 adjetivo([normal|S],S).
 
 verboIndicativo([deseo|S],S,singular).
+verboIndicativo([he,deseado|S],S,singular).
+verboIndicativo([desearia|S],S,singular).
 verboIndicativo([gustaria|S],S,singular).
 verboIndicativo([quiero|S],S,singular).
+verboIndicativo([querria|S],S,singular).
 
 verboInfinitivo([llevar|S],S,singular).
 verboInfinitivo([tener|S],S,singular).
 verboInfinitivo([llegar|S],S,singular).
+verboInfinitivo([comer|S],S,singular).
+verboInfinitivo([correr|S],S,singular).
+verboInfinitivo([trotar|S],S,singular).
+verboInfinitivo([tomar|S],S,singular).
+verboInfinitivo([gustar|S],S,singular).
+verboInfinitivo([querer|S],S,singular).
+verboInfinitivo([tener|S],S,singular).
+verboInfinitivo([perder|S],S,singular).
+verboInfinitivo([empezar|S],S,singular).
+verboInfinitivo([realizar|S],S,singular).
 
 verbo2([han,diagnosticado|S],S,singular).
 verbo2([habia,pensado|S],S,singular).
@@ -103,7 +129,14 @@ verbo2([ejercito|S],S,singular).
 verbo2([hago,ejercicio|S],S,singular).
 verbo2([cleteo|S],S,singular).
 verbo2([gusta|S],S,singular).
+verbo2([gustan|S],S,plural).
 verbo2([tengo|S],S,singular).
+verbo2([como|S],S,singular).
+verbo2([troto|S],S,singular).
+verbo2([tomo|S],S,singular).
+verbo2([pienso|S],S,singular).
+verbo2([he,pensado|S],S,singular).
+verbo2([estoy|S],S,singular).
 
 % para pruebas hacer: oracion2([palabra1,palabra2,palabra2,.....], [lista vacia]).
 

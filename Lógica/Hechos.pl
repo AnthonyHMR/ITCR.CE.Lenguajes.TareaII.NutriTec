@@ -1,41 +1,32 @@
-go:-
-    write('Welcome to nutritec'),nl,
-    read(X),nl,
-    split_string(X," ","",Out),
-    write(Out),
-    oracion(Out).
-
-%oracion(L):-sintagma_nominal([X|_], [_|Y]).
-
-%sintagma_nominal(X, L):-determinante(X),nombre(Y).
-
 saludo([buenas]).
+saludo([buenos, dias]).
+saludo([buenas,tardes]).
+saludo([buenas,noches]).
 saludo([hola]).
 
-verbo(comer).
-verbo(correr).
-verbo(como).
-verbo(trotar).
-verbo(troto).
-verbo(tomar).
-verbo(tomo).
-verbo(gustar).
-verbo(gustaría).
-verbo(gusta).
-verbo(querer).
-verbo(quiero).
-verbo(tener).
-verbo(tengo).
+verbo(deseado).
+verbo(pensado).
 
-pronombre([yo]).
-nombre([hombre]).
+playNutriTec:-
+    read(X),nl,
+    write('Hola encantado de verlo mejorar su estilo de vida. Cuenteme ¿en qué lo puedo ayudar?'),nl,
+    write('Excelente iniciativa. Estamos para asesorarte en todo lo que necesites.
+¿Tienes alguna enfermedad por la que ha iniciado este proceso?, ¿cual?'),nl,
+    write('¿Tienes pensado una cantidad específica de calorías diarias por consumir?'),nl,
+    write('¿Cuantas veces a la semana hace actividad física?'),nl,
+    write('¿Tienes un tipo de dieta que te gustaría realizar?'),nl,
+    write('¿Qué alimentos preferirías no consumir?'),nl,
+    write('Puedes empezar con el siguiente plan alimenticio bajo en grasas.'),nl,
+    read(Y),nl,
+    split_string(Y," ","",Out),nl,
+    write('.'),nl,
+    write(Out),
+    verbo(Out).
 
-determinante(el).
-determinante(la).
-determinante(los).
-determinante(las).
-determinante(a).
-determinante(al).
+
+
+
+
 
 
 
