@@ -1,8 +1,16 @@
 :-include('../Gramática/bnf.pl').
 
+listaDatos(0,[],Enf).
+listaDatos(Cant,[Var|_],Enf):-
+    Cant =:= 1,
+    nuevaCant is Cant-1,
+    write(nuevaCant),
+    listaDatos(0,[],Var).
+
 play:-
     introduccion,
-    preguntas.
+    preguntas,
+    despedida.
 
 introduccion:-
     leer_frase(X),nl,
@@ -27,11 +35,13 @@ preguntas:-
     oracion2(X4,[]),
     write('¿Qué alimentos preferirías no consumir?'),nl,
     leer_frase(X5),nl,
-    oracion2(X5,[]),
-    write('Puedes empezar con el siguiente plan alimenticio bajo en grasas.'),nl,
-    leer_frase(X6),nl,
-    oracion2(X6,[]).
+    oracion2(X5,[]),!,
+    write('Puedes empezar con el siguiente plan alimenticio bajo en grasas.'),nl.
 
+despedida:-
+    leer_frase(X),nl,
+    oracion2(X,[]),
+    write('Fue un gusto poder atenderle. Esperamos y nuestra recomendacion le haya servido de ayuda.').
 
 leer_frase(Palabras):-
     get0(Caracter),
