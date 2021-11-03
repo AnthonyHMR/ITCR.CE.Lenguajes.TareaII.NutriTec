@@ -1,16 +1,17 @@
 % Posibles estructuras de una oración aceptada por el BNF
-oracion2(S0,S,Clave):-sintagma_nominal2(S0,S1,N),sintagma_verbal2(S1,S,N,Clave),!.
+oracion2(S0,S,Clave):-sintagma_nominal2(S0,S1,N,Clave0),sintagma_verbal2(S1,S2,N,Clave1),conjuncion(S2,S3),oracion2(S3,S,Clave),!.
+oracion2(S0,S,Clave):-sintagma_nominal2(S0,S1,N,Clave),sintagma_verbal2(S1,S,N,Clave),!.
 oracion2(S0,S,Clave):-sintagma_nominal2(S0,S,N,Clave),!.
-oracion2(S0,S,Clave):-sintagma_verbal2(S0,S,N),!.
-oracion2(S0,S,Clave):-sintagma_verbal2(S0,S1,N),conjuncion(S1,S2),oracion2(S2,S,Clave),!.
+oracion2(S0,S,Clave):-sintagma_verbal2(S0,S,N,Clave),!.
+oracion2(S0,S,Clave):-sintagma_verbal2(S0,S1,N,Clave1),conjuncion(S1,S2),oracion2(S2,S,Clave),!.
 oracion2(S0,S,Clave):-negacion(S0,S,Clave),!.
-oracion2(S0,S,Clave):-negacion(S0,S1),oracion2(S1,S,Clave),!.
+oracion2(S0,S,Clave):-negacion(S0,S1,Clave),oracion2(S1,S,Clave1),!.
 oracion2(S0,S,Clave):-afirmacion(S0,S),!.
 oracion2(S0,S,Clave):-afirmacion(S0,S1),oracion2(S1,S,Clave),!.
 oracion2(S0,S,Clave):-agradecimiento(S0,S),!.
 oracion2(S0,S,Clave):-agradecimiento(S0,S1),oracion2(S1,S,Clave),!.
 oracion2(S0,S,Clave):-saludo(S0,S,Clave),!.
-%oracion2(S0,S,Clave):-numero(S0,S,Clave).
+oracion2(S0,S,Clave):-numero(S0,S,Clave).
 
 head2([H|_], H).
 
@@ -29,7 +30,7 @@ saludo([buenas,noches,nutritec|S],S,[]).
 % Frases de negación
 negacion([no|S],S,no).
 negacion([jamas|S],S,no).
-negacion([nunca|S],no).
+negacion([nunca|S],S,no).
 
 % Frases de afirmación
 afirmacion([si|S],S).
@@ -50,25 +51,27 @@ agradecimiento([lo,agradezco|S],S).
 agradecimiento([lo,agradezco,nutritec|S],S).
 
 % Estructuras de sintagma nominal aceptado por BNF
-sintagma_nominal2(S0,S,N):-determinante2(S0,S1,N,SX),nombre2(S1,S,N,SX),!.
-sintagma_nominal2(S0,S,N):-nombre2(S0,S,N,SX),!.
-sintagma_nominal2(S0,S,N):-determinante2(S0,S1,N,SX),nombre2(S1,S2,N,SX),adjetivo(S2,S),!.
-sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),nombre2(S1,S,N,SX),!.
-sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),nombre2(S1,S2,N,SX),adjetivo(S2,S),!.
-sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),numero(S1,S2),nombre2(S2,S,N,SX),!.
-sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),numero(S1,S),!.
-sintagma_nominal2(S0,S,N,Clave):-numero(S0,S1),tiempo1(S1,S2),tiempo2(S2,S),!.
-sintagma_nominal2(S0,S,N):-adjetivo(S0,S),!.
+sintagma_nominal2(S0,S,N,Clave):-determinante2(S0,S1,N,SX),nombre2(S1,S,N,SX),!.
+sintagma_nominal2(S0,S,N,Clave):-nombre2(S0,S,N,SX),!.
+sintagma_nominal2(S0,S,N,Clave):-determinante2(S0,S1,N,SX),nombre2(S1,S2,N,SX),adjetivo(S2,S),!.
+sintagma_nominal2(S0,S,N,Clave):-pronombreIndet(S0,S1,N,SX),nombre2(S1,S,N,SX),!.
+sintagma_nominal2(S0,S,N,Clave):-pronombreIndet(S0,S1,N,SX),nombre2(S1,S2,N,SX),adjetivo(S2,S),!.
+sintagma_nominal2(S0,S,N,Clave):-pronombreIndet(S0,S1,N,SX),numero(S1,S2,Clave),nombre2(S2,S,N,SX),!.
+sintagma_nominal2(S0,S,N,Clave):-pronombreIndet(S0,S1,N,SX),numero(S1,S,Clave),!.
+sintagma_nominal2(S0,S,N,Clave):-numero(S0,S1,Clave),tiempo1(S1,S2),tiempo2(S2,S),!.
+sintagma_nominal2(S0,S,N,Clave):-numero(S0,S1,Clave),nombre2(S1,S,N,SX),!.
+sintagma_nominal2(S0,S,N,Clave):-adjetivo(S0,S),!.
 sintagma_nominal2(S0,S,N,Clave):-enfermedad(S0,S,Clave),!.
-sintagma_nominal2(S0,S,N):-pronombrePersonal(S0,S,N),!.
-sintagma_nominal2(S0,S,N):-pronombreReflex(S0,S,N),!.
+sintagma_nominal2(S0,S,N,Clave):-pronombrePersonal(S0,S,N),!.
+sintagma_nominal2(S0,S,N,Clave):-pronombreReflex(S0,S,N),!.
 
 
 % Estructuras de sintagma verbal aceptado por BNF
 sintagma_verbal2(S0,S,N,Clave):-verbo2(S0,S1,N),sintagma_nominal2(S1,S,N1,Clave).
+sintagma_verbal2(S0,S,N,Clave):-verboIndicativo(S0,S1,N),sintagma_nominal2(S1,S,N1,Clave).
 sintagma_verbal2(S0,S,N,Clave):-verboIndicativo(S0,S1,N),verboInfinitivo(S1,S2,N),sintagma_nominal2(S2,S,N1,Clave).
-sintagma_verbal2(S0,S,N):-verboIndicativo(S0,S1,N),verboInfinitivo(S1,S2,N),adjetivo(S2,S).
-sintagma_verbal2(S0,S,N):-verbo2(S0,S,N).
+sintagma_verbal2(S0,S,N,Clave):-verboIndicativo(S0,S1,N),verboInfinitivo(S1,S2,N),adjetivo(S2,S).
+sintagma_verbal2(S0,S,N,Clave):-verbo2(S0,S,N).
 
 % Conjunciones
 conjuncion([pero|S],S).
@@ -77,6 +80,7 @@ conjuncion([y|S],S).
 conjuncion([o|S],S).
 conjuncion([e|S],S).
 conjuncion([u|S],S).
+conjuncion([de|S],S).
 
 % Pronombres
 pronombrePersonal([yo|S],S,singular).
@@ -122,7 +126,7 @@ nombre2([peso|S],S,singular,masc).
 nombre2([preferencias|S],S,plural,fem).
 
 % Numero
-numero([A|S],S):-number(A).
+numero([A|S],S,A):-number(A).
 
 % Frases para frecuencia de eventos
 tiempo1([veces|S],S).
