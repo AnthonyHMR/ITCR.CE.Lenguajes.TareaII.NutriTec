@@ -17,7 +17,7 @@ padecimientos(p1, dislipemia, 'problemas de control de colesterol', s1).
 padecimientos(p2, hipercolesterolemia, 'aumento en los niveles óptimos de colesterol en la sangre',s1).
 padecimientos(p3, diabetes,'nivel de azúcar por encima de lo normal', s3).
 padecimientos(p4, sobrepeso, 'IMC por encima de lo recomendado', s4).
-padecimientos(p5, desnutrición, 'IMC por debajo de lo recomendado', s6).
+padecimientos(p5, desnutricion, 'IMC por debajo de lo recomendado', s6).
 
 % dietas(codigo de dieta, codigo nombre dieta, lista padecimientos no
 % recomendados, lista padecimientos recomendados, actividades no

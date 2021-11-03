@@ -16,6 +16,7 @@ consultaRecomend(Padecimiento, Codigodieta):-
 consultadetalledieta(Codigo):-
    detalledieta(Codigo, Texto), write(Texto).
 
+setnivel(Nivel, 'inicial'):- Nivel = no, !.
 setnivel(Nivel, 'inicial'):-Nivel<3,!.
 setnivel(Nivel, 'intermedio'):- Nivel<5, !.
 setnivel(Nivel, 'avanzado').

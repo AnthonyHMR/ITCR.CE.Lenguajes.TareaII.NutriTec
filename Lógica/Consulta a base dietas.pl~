@@ -77,7 +77,6 @@ validarDieta(Padecimiento, Calorias, Actividad, Tipodieta):-
     dietas(s1, _,_,_,_,_,_, Detalle), write('Para empezar le recomiendo la dieta: '),
     consultanombredieta(s1, Nombre), write(Nombre),nl, consultadetalledieta(Detalle),!.
 
-
 validarDieta(Padecimiento, Calorias, Actividad, Tipodieta):-
     Calorias = no, Actividad = no, Tipodieta = no,
     consultapadecimiento(Padecimiento, Codigopade),
