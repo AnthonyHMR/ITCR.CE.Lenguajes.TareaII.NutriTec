@@ -16,6 +16,7 @@ consultaRecomend(Padecimiento, Codigodieta):-
 consultadetalledieta(Codigo):-
    detalledieta(Codigo, Texto), write(Texto).
 
+setnivel(Nivel, 'inicial'):- Nivel = no, !.
 setnivel(Nivel, 'inicial'):-Nivel<3,!.
 setnivel(Nivel, 'intermedio'):- Nivel<5, !.
 setnivel(Nivel, 'avanzado').
@@ -60,15 +61,12 @@ escribirActividades([Act|Actividades]):-write(Act), nl, escribirActividades(Acti
 
 recomiendaActividad(Nivel, ListaActividades):-
     Nivel='intermedio',
-    write('Ademas le recomiendo hacer estas actividades físicas: '), nl,
     escribirActividades(ListaActividades).
 recomiendaActividad(Nivel, ListaActividades):-
     Nivel='inicial',
-    write('Ademas le recomiendo hacer estas actividades físicas: '), nl,
     escribirActividades(ListaActividades).
 recomiendaActividad(Nivel, ListaActividades):-
     Nivel='avanzado',
-    write('Ademas de su rutina, podría considerar practicar alguna de estas actividades: '), nl,
     escribirActividades(ListaActividades).
 %Comprueba que una tipo de dieta sea valida para un padecimiento dado
 %

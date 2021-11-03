@@ -66,6 +66,7 @@ sintagma_nominal2(S0,S,N,Clave):-numero(S0,S1,Clave),tiempo1(S1,S2),tiempo2(S2,S
 sintagma_nominal2(S0,S,N,Clave):-numero(S0,S1,Clave),nombre2(S1,S,N,SX),!.
 sintagma_nominal2(S0,S,N,Clave):-adjetivo(S0,S),!.
 sintagma_nominal2(S0,S,N,Clave):-enfermedad(S0,S,Clave),!.
+sintagma_nominal2(S0,S,N,Clave):-dieta(S0,S,Clave),!.
 sintagma_nominal2(S0,S,N,Clave):-pronombrePersonal(S0,S,N),!.
 sintagma_nominal2(S0,S,N,Clave):-pronombreReflex(S0,S,N),!.
 
@@ -117,6 +118,7 @@ dieta([proteica|S],S,proteica).
 dieta([vegetariana|S],S,vegetariana).
 dieta([alcalina|S],S,alcalina).
 dieta([detox|S],S,detox).
+dieta([hipercalorica|S], S, hipercalorica).
 
 % Nombres o sustantivos
 nombre2([estilo,de,vida|S],S,singular,masc).
