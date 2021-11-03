@@ -1,18 +1,20 @@
 :-include('base de datos.pl').
 
 nivelesactividad(Valor,Y):-
-    setnivel(Valor, Y), write(Y).
+    setnivel(Valor, Y).
+consultanombredieta(Codigodieta, Nombre):-
+   nombredieta(Codigodieta, Nombre).
 
 consultatipodieta(Tipo, Codigodieta):-
-   tiposdietas(Codigodieta, Tipo), write(Tipo).
+   tiposdietas(Codigodieta, Tipo).
 
 consultapadecimiento(Nombrepade, Codigopade):-
-    padecimientos(Codigopade, Nombrepade, _, _), write(Codigopade), nl.
+    padecimientos(Codigopade, Nombrepade, _, _),nl.
+consultaRecomend(Padecimiento, Codigodieta):-
+    padecimientos(Padecimiento, _, _, Codigodieta).
 
 consultadetalledieta(Codigo):-
-    dietas(Codigo,_,_,_,_,_,_, Detalle),nombredieta(Codigo, Nombre), write(Nombre),
-    nl,
-    detalledieta(Detalle, Texto), write(Texto).
+   detalledieta(Codigo, Texto), write(Texto).
 
 setnivel(Nivel, 'inicial'):-Nivel<3,!.
 setnivel(Nivel, 'intermedio'):- Nivel<5, !.
@@ -53,10 +55,25 @@ calorias_a_dieta(Calorias, Mascerca):-
     Odif is abs(Rest2), Dif > Odif,
     Mascerca is 2500.
 %Comprueba que una tipo de dieta sea valida para un padecimiento dado
-tipoDietaValida(Tipo, Pade):-
-    consultapadecimiento(Pade, Codigopade),nl,
-    consultatipodieta(Tipo, Codigodieta),
-    dietas(_, Codigodieta, _, PadeNoRec,_,_,_,_), not(miembroPadecimiento(Codigopade, PadeNoRec)).
+%
+
+validarDieta(Padecimiento, Calorias, Actividad, Tipodieta):-
+    Calorias = no, Actividad = no, Tipodieta = no,
+    consultapadecimiento(Padecimiento, Codigopade),
+    consultaRecomend(Codigopade,Codigodieta),
+    dietas(Codigodieta,_, _,_,_,_,_,Detalle),
+    write('Le recomiendo la dieta: '), nl, consultadetalledieta(Detalle),!.
+
+validarDieta(Padecimiento, Calorias, Actividad, Tipodieta):-
+    Calorias = no, Actividad = no,
+    consultapadecimiento(Padecimiento, Codigopade),nl,
+    consultadetalledieta(Detalle).
+
+validarDieta(Padecimiento, Calorias, Actividad, Tipodieta):-
+    Padecimiento = no, Calorias = no, Actividad = no, Tipodieta = no,
+    dietas(s1, _,_,_,_,_,_, Detalle), write('Para empezar le recomiendo la dieta '),
+    consultanombredieta(s1, Nombre), write(Nombre),nl, consultadetalledieta(Detalle).
+
 
 
 

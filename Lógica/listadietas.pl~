@@ -74,7 +74,7 @@ Merienda:
 1 pequeño tazón de ensalada de frutas: frutas sugeridas: pera, plátano, manzana, mango, kiwi, mandarina, piña, mango, + 1 cucharada de pasas de uva cereza y ciruela + 1 cucharada de semillas de lino dorado.
 
 Almuerzo:
-1 plato con ensalada verde: lechuga, acelga, repollo crudo, cebolla, cebolleta, apio y champiñón.
+1 plato con ensalada verde: lechuga, repollo crudo, cebolla, apio y champiñón.
 Medio filete  de salmón con romero
 Puré de papas O zanahorias
 
@@ -104,4 +104,32 @@ Cena
 Ensalada de lechugas mixtas con vinagre balsámico
 Pastel de Atún
 Gelatina sin azúcar').
+
+detalledieta(detalle6, '
+Desayuno:
+-1 plato de gallo pinto con huevo, queso y planano maduro
+-1 taza de café
+-Fruta de preferencia
+
+Merienda:
+1 Banano
+2 Waffles con mantequilla de maní
+Jugo de naranja (1 taza)
+
+Almuerzo:
+Arroz con pollo
+Frijoles refritos (1/2 taza)
+Ensalada Asiática de Repollo
+Papas tostadas (1 oz)
+Refresco natural
+
+Merienda:
+Pan de Maíz
+Té Verde con Jengibre
+
+Cena:
+1 taza de vegetales salteados.
+1 taza de pure de papas.
+1 bistec encebollado (100g)
+').
 
