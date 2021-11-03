@@ -30,7 +30,10 @@ preguntas:-
     write('¿Qué alimentos preferirías no consumir?'),nl,
     leer_frase(X5),nl,
     oracion2(X5,[], Clave),
-    validarDieta(Enfermedad, Calorias, Actividad, Tipodieta),!.
+    validarDieta(Enfermedad, Calorias, Actividad, Tipodieta),nl,!.
+
+preguntas:-
+    write('No hemos podido encontrar ninguna dieta que cumpla con la información que nos haz brindado'),nl,!.
 
 despedida:-
     leer_frase(X),nl,
