@@ -66,7 +66,10 @@ recomiendaActividad(Nivel, ListaActividades):-
     Nivel='inicial',
     write('Ademas le recomiendo hacer estas actividades físicas: '), nl,
     escribirActividades(ListaActividades).
-
+recomiendaActividad(Nivel, ListaActividades):-
+    Nivel='avanzado',
+    write('Ademas de su rutina, podría considerar practicar alguna de estas actividades: '), nl,
+    escribirActividades(ListaActividades).
 %Comprueba que una tipo de dieta sea valida para un padecimiento dado
 %
 validarDieta(Padecimiento, Calorias, Actividad, Tipodieta):-
@@ -100,6 +103,6 @@ validarDieta(Padecimiento, Calorias, Actividad, Tipodieta):-
     dietas(Codigonombre,Codigodieta,Mascerca,PadeNoRec,_,_,Actividades,Detalle), not(miembroPadecimiento(Codigopade, PadeNoRec)),
     write('Para empezar le recomiendo la dieta: '),
     consultanombredieta(Codigonombre, Nombre), write(Nombre),nl, consultadetalledieta(Detalle),
-    nl, write('Tambien le recomiendo hacer algunas de estas actividades: '), nl,
+    nl,nl, write('Tambien le recomiendo hacer algunas de estas actividades: '), nl,
     recomiendaActividad(Nivel,Actividades).
 

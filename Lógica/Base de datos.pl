@@ -1,10 +1,10 @@
 :-include('listadietas.pl').
-tiposdietas(d1, 'keto').
-tiposdietas(d2, 'proteica').
-tiposdietas(d3, 'vegetariana').
-tiposdietas(d4, 'alcalina').
-tiposdietas(d5, 'detox').
-tiposdietas(d6, 'hipercalorica').
+tiposdietas(d1, keto).
+tiposdietas(d2, proteica).
+tiposdietas(d3, vegetariana).
+tiposdietas(d4, alcalina).
+tiposdietas(d5, detox).
+tiposdietas(d6, hipercalorica).
 
 nombredieta(s1,'dieta baja en carbohidratos').
 nombredieta(s2, 'dieta alta en proteinas').
