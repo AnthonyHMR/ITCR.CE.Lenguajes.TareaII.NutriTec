@@ -1,3 +1,4 @@
+% Posibles estructuras de una oración aceptada por el BNF
 oracion2(S0,S):-sintagma_nominal2(S0,S1,N),sintagma_verbal2(S1,S,N),!.
 oracion2(S0,S):-sintagma_nominal2(S0,S,N),!.
 oracion2(S0,S):-sintagma_verbal2(S0,S,N),!.
@@ -11,42 +12,57 @@ oracion2(S0,S):-agradecimiento(S0,S1),oracion2(S1,S),!.
 oracion2(S0,S):-saludo(S0,S),!.
 oracion2(S0,S):-numero(S0,S).
 
+% Saludos
 saludo([hola|S],S).
+saludo([hola,nutritec|S],S).
 saludo([buenas|S],S).
+saludo([buenas,nutritec|S],S).
 saludo([buenos,dias|S],S).
+saludo([buenos,dias,nutritec|S],S).
 saludo([buenas,tardes|S],S).
+saludo([buenas,tardes,nutritec|S],S).
 saludo([buenas,noches|S],S).
+saludo([buenas,noches,nutritec|S],S).
 
+% Frases de negación
 negacion([no|S],S).
-negacion([jamás|S],S).
+negacion([jamas|S],S).
 negacion([nunca|S],S).
 
+% Frases de afirmación
 afirmacion([si|S],S).
 afirmacion([en,efecto|S],S).
 afirmacion([claro|S],S).
 afirmacion([por,supuesto|S],S).
 
+% Frases de agradecimiento
 agradecimiento([muchas,gracias|S],S).
 agradecimiento([ok,gracias|S],S).
 agradecimiento([gracias|S],S).
 agradecimiento([lo,aprecio|S],S).
 agradecimiento([lo,agradezco|S],S).
 
+% Estructuras de sintagma nominal aceptado por BNF
 sintagma_nominal2(S0,S,N):-determinante2(S0,S1,N,SX),nombre2(S1,S,N,SX),!.
+sintagma_nominal2(S0,S,N):-nombre2(S0,S,N,SX),!.
 sintagma_nominal2(S0,S,N):-determinante2(S0,S1,N,SX),nombre2(S1,S2,N,SX),adjetivo(S2,S),!.
 sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),nombre2(S1,S,N,SX),!.
 sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),nombre2(S1,S2,N,SX),adjetivo(S2,S),!.
 sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),numero(S1,S2),nombre2(S2,S,N,SX),!.
+sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),numero(S1,S),!.
 sintagma_nominal2(S0,S,N):-numero(S0,S1),tiempo1(S1,S2),tiempo2(S2,S),!.
 sintagma_nominal2(S0,S,N):-adjetivo(S0,S),!.
 sintagma_nominal2(S0,S,N):-enfermedad(S0,S),!.
 sintagma_nominal2(S0,S,N):-pronombrePersonal(S0,S,N),!.
 sintagma_nominal2(S0,S,N):-pronombreReflex(S0,S,N),!.
 
+% Estructuras de sintagma verbal aceptado por BNF
 sintagma_verbal2(S0,S,N):-verbo2(S0,S1,N),sintagma_nominal2(S1,S,N1).
 sintagma_verbal2(S0,S,N):-verboIndicativo(S0,S1,N),verboInfinitivo(S1,S2,N),sintagma_nominal2(S2,S,N1).
+sintagma_verbal2(S0,S,N):-verboIndicativo(S0,S1,N),verboInfinitivo(S1,S2,N),adjetivo(S2,S).
 sintagma_verbal2(S0,S,N):-verbo2(S0,S,N).
 
+% Conjunciones
 conjuncion([pero|S],S).
 conjuncion([sin, embargo|S],S).
 conjuncion([y|S],S).
@@ -54,6 +70,7 @@ conjuncion([o|S],S).
 conjuncion([e|S],S).
 conjuncion([u|S],S).
 
+% Pronombres
 pronombrePersonal([yo|S],S,singular).
 
 pronombreReflex([me|S],S,singular).
@@ -65,28 +82,37 @@ pronombreIndet([una|S],S,singular,fem).
 pronombreIndet([unas|S],S,plural,fem).
 pronombreIndet([al|S],S,singular,masc).
 
+% Determinantes
 determinante2([el|S],S,singular,masc).
 determinante2([la|S],S,singular,fem).
 determinante2([las|S],S,plural,fem).
 determinante2([los|S],S,plural,masc).
 
+% Enfermedades
 enfermedad([dislipidemia|S],S).
 enfermedad([hipercolesterolemia|S],S).
 enfermedad([desnutricion|S],S).
 enfermedad([sobrepeso|S],S).
+enfermedad([diabetes|S],S).
 
+% Nombres o sustantivos
 nombre2([estilo,de,vida|S],S,singular,masc).
 nombre2([calorias|S],S,plural,fem).
+nombre2([dieta|S],S,singular,fem).
 nombre2([dieta,keto|S],S,singular,fem).
 nombre2([dieta,proteica|S],S,singular,fem).
 nombre2([dieta,vegetariana|S],S,singular,fem).
 nombre2([dieta,alcalina|S],S,singular,fem).
+nombre2([dieta,detox|S],S,singular,fem).
 nombre2([mariscos|S],S,plural,masc).
 nombre2([vegetales|S],S,plural,masc).
 nombre2([peso|S],S,singular,masc).
+nombre2([preferencias|S],S,plural,fem).
 
+% Numero
 numero([A|S],S):-number(A).
 
+% Frases para frecuencia de eventos
 tiempo1([veces|S],S).
 tiempo1([horas|S],S).
 tiempo1([minutos|S],S).
@@ -94,12 +120,19 @@ tiempo1([segundos|S],S).
 
 tiempo2([al,dia|S],S).
 tiempo2([a,la,semana|S],S).
-tiempo2([al,mes|S],S).
-tiempo2([al,año|S],S).
 
+% Adejtivos
 adjetivo([saludable|S],S).
 adjetivo([normal|S],S).
+adjetivo([vegana|S],S).
+adjetivo([carnivora|S],S).
 
+% Advervios
+adverbio([mucho|S],S).
+adverbio([bastante|S],S).
+adverbio([poco|S],S).
+
+% Verbos
 verboIndicativo([deseo|S],S,singular).
 verboIndicativo([he,deseado|S],S,singular).
 verboIndicativo([desearia|S],S,singular).
