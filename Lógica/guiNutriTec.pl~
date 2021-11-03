@@ -32,6 +32,9 @@ preguntas:-
     oracion2(X5,[], Clave),
     validarDieta(Enfermedad, Calorias, Actividad, Tipodieta),!.
 
+preguntas:-
+    write('No hemos podido encontrar ninguna dieta que cumpla con la información que nos haz brindado'),!.
+
 despedida:-
     leer_frase(X),nl,
     oracion2(X,[], Clave),
