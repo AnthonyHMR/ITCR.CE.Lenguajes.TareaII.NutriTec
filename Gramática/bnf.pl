@@ -1,3 +1,5 @@
+:-style_check(-singleton).
+
 % Posibles estructuras de una oración aceptada por el BNF
 oracion2(S0,S,Clave):-sintagma_nominal2(S0,S1,N,Clave0),sintagma_verbal2(S1,S2,N,Clave1),conjuncion(S2,S3),oracion2(S3,S,Clave),!.
 oracion2(S0,S,Clave):-sintagma_nominal2(S0,S1,N,Clave),sintagma_verbal2(S1,S,N,Clave),!.
@@ -55,6 +57,8 @@ sintagma_nominal2(S0,S,N,Clave):-determinante2(S0,S1,N,SX),nombre2(S1,S,N,SX),!.
 sintagma_nominal2(S0,S,N,Clave):-nombre2(S0,S,N,SX),!.
 sintagma_nominal2(S0,S,N,Clave):-determinante2(S0,S1,N,SX),nombre2(S1,S2,N,SX),adjetivo(S2,S),!.
 sintagma_nominal2(S0,S,N,Clave):-pronombreIndet(S0,S1,N,SX),nombre2(S1,S,N,SX),!.
+sintagma_nominal2(S0,S,N,Clave):-pronombreIndet(S0,S1,N,SX),nombre2(S1,S2,N,SX),dieta(S2,S,Clave),!.
+sintagma_nominal2(S0,S,N,Clave):-pronombreIndet(S0,S1,N,SX),dieta(S1,S,Clave),!.
 sintagma_nominal2(S0,S,N,Clave):-pronombreIndet(S0,S1,N,SX),nombre2(S1,S2,N,SX),adjetivo(S2,S),!.
 sintagma_nominal2(S0,S,N,Clave):-pronombreIndet(S0,S1,N,SX),numero(S1,S2,Clave),nombre2(S2,S,N,SX),!.
 sintagma_nominal2(S0,S,N,Clave):-pronombreIndet(S0,S1,N,SX),numero(S1,S,Clave),!.
@@ -107,15 +111,22 @@ enfermedad([desnutricion|S],S,desnutricion).
 enfermedad([sobrepeso|S],S,sobrepeso).
 enfermedad([diabetes|S],S,diabetes).
 
+% Tipo de dieta
+dieta([keto|S],S,keto).
+dieta([proteica|S],S,proteica).
+dieta([vegetariana|S],S,vegetariana).
+dieta([alcalina|S],S,alcalina).
+dieta([detox|S],S,detox).
+
 % Nombres o sustantivos
 nombre2([estilo,de,vida|S],S,singular,masc).
 nombre2([calorias|S],S,plural,fem).
 nombre2([dieta|S],S,singular,fem).
-nombre2([dieta,keto|S],S,singular,fem).
-nombre2([dieta,proteica|S],S,singular,fem).
-nombre2([dieta,vegetariana|S],S,singular,fem).
-nombre2([dieta,alcalina|S],S,singular,fem).
-nombre2([dieta,detox|S],S,singular,fem).
+%nombre2([dieta,keto|S],S,singular,fem).
+%nombre2([dieta,proteica|S],S,singular,fem).
+%nombre2([dieta,vegetariana|S],S,singular,fem).
+%nombre2([dieta,alcalina|S],S,singular,fem).
+%nombre2([dieta,detox|S],S,singular,fem).
 nombre2([mariscos|S],S,plural,masc).
 nombre2([vegetales|S],S,plural,masc).
 nombre2([carbohidratos|S],S,plural,masc).
@@ -129,6 +140,7 @@ nombre2([preferencias|S],S,plural,fem).
 numero([A|S],S,A):-number(A).
 
 % Frases para frecuencia de eventos
+tiempo1([vez|S],S).
 tiempo1([veces|S],S).
 tiempo1([horas|S],S).
 tiempo1([minutos|S],S).
