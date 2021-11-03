@@ -3,7 +3,7 @@
 play:-
     introduccion,
     preguntas,
-    recomendacion.
+    despedida.
 
 introduccion:-
     leer_frase(X),nl,
@@ -28,13 +28,12 @@ preguntas:-
     oracion2(X4,[]),
     write('¿Qué alimentos preferirías no consumir?'),nl,
     leer_frase(X5),nl,
-    oracion2(X5,[]).
+    oracion2(X5,[]),!.
 
-recomendacion:-
-    write('Puedes empezar con el siguiente plan alimenticio bajo en grasas.'),nl,
+despedida:-
     leer_frase(X),nl,
-    oracion2(X,[]).
-
+    oracion2(X,[]),
+    write('Fue un gusto poder atenderle. Esperamos y nuestra recomendacion le haya servido de ayuda.').
 
 leer_frase(Palabras):-
     get0(Caracter),
