@@ -31,6 +31,7 @@ sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),nombre2(S1,S,N,SX),!.
 sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),nombre2(S1,S2,N,SX),adjetivo(S2,S),!.
 sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),numero(S1,S2),nombre2(S2,S,N,SX),!.
 sintagma_nominal2(S0,S,N):-numero(S0,S1),tiempo1(S1,S2),tiempo2(S2,S),!.
+sintagma_nominal2(S0,S,N):-adjetivo(S0,S),!.
 sintagma_nominal2(S0,S,N):-enfermedad(S0,S),!.
 sintagma_nominal2(S0,S,N):-pronombrePersonal(S0,S,N),!.
 sintagma_nominal2(S0,S,N):-pronombreReflex(S0,S,N),!.

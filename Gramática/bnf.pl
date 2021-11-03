@@ -8,7 +8,14 @@ oracion2(S0,S):-afirmacion(S0,S),!.
 oracion2(S0,S):-afirmacion(S0,S1),oracion2(S1,S),!.
 oracion2(S0,S):-agradecimiento(S0,S),!.
 oracion2(S0,S):-agradecimiento(S0,S1),oracion2(S1,S),!.
+oracion2(S0,S):-saludo(S0,S),!.
 oracion2(S0,S):-numero(S0,S).
+
+saludo([hola|S],S).
+saludo([buenas|S],S).
+saludo([buenos,dias|S],S).
+saludo([buenas,tardes|S],S).
+saludo([buenas,noches|S],S).
 
 negacion([no|S],S).
 negacion([jamás|S],S).
@@ -94,6 +101,7 @@ adjetivo([saludable|S],S).
 adjetivo([normal|S],S).
 
 verboIndicativo([deseo|S],S,singular).
+verboIndicativo([he,deseado|S],S,singular).
 verboIndicativo([desearia|S],S,singular).
 verboIndicativo([gustaria|S],S,singular).
 verboIndicativo([quiero|S],S,singular).
@@ -127,6 +135,7 @@ verbo2([como|S],S,singular).
 verbo2([troto|S],S,singular).
 verbo2([tomo|S],S,singular).
 verbo2([pienso|S],S,singular).
+verbo2([he,pensado|S],S,singular).
 verbo2([estoy|S],S,singular).
 
 % para pruebas hacer: oracion2([palabra1,palabra2,palabra2,.....], [lista vacia]).
