@@ -1,6 +1,8 @@
 :-style_check(-singleton).
 
 % Posibles estructuras de una oración aceptada por el BNF
+% S0 es una lista de palabras de la oracion digitada, S es un parametro que muestra el resto de la lista, la cual debe ser vacia ya
+% que toda la oración está en S. Clave es la palabra clave que se encuentra en la oración, esto para recolectar información a la hora de recomendar una dieta.
 oracion2(S0,S,Clave):-sintagma_nominal2(S0,S1,N,Clave0),sintagma_verbal2(S1,S2,N,Clave1),conjuncion(S2,S3),oracion2(S3,S,Clave),!.
 oracion2(S0,S,Clave):-sintagma_nominal2(S0,S1,N,Clave),sintagma_verbal2(S1,S,N,Clave),!.
 oracion2(S0,S,Clave):-sintagma_nominal2(S0,S,N,Clave),!.
@@ -15,7 +17,6 @@ oracion2(S0,S,Clave):-agradecimiento(S0,S1),oracion2(S1,S,Clave),!.
 oracion2(S0,S,Clave):-saludo(S0,S,Clave),!.
 oracion2(S0,S,Clave):-numero(S0,S,Clave).
 
-head2([H|_], H).
 
 % Saludos
 saludo([hola|S],S,[]).
@@ -52,7 +53,8 @@ agradecimiento([lo,aprecio,nutritec|S],S).
 agradecimiento([lo,agradezco|S],S).
 agradecimiento([lo,agradezco,nutritec|S],S).
 
-% Estructuras de sintagma nominal aceptado por BNF
+% Estructuras de sintagma nominal aceptado por BNF.
+% Los parametros N y SX verifican que tanto el numero (N) como el género (SX) coincidan entre las palabras.
 sintagma_nominal2(S0,S,N,Clave):-determinante2(S0,S1,N,SX),nombre2(S1,S,N,SX),!.
 sintagma_nominal2(S0,S,N,Clave):-nombre2(S0,S,N,SX),!.
 sintagma_nominal2(S0,S,N,Clave):-determinante2(S0,S1,N,SX),nombre2(S1,S2,N,SX),adjetivo(S2,S),!.
@@ -124,11 +126,6 @@ dieta([hipercalorica|S], S, hipercalorica).
 nombre2([estilo,de,vida|S],S,singular,masc).
 nombre2([calorias|S],S,plural,fem).
 nombre2([dieta|S],S,singular,fem).
-%nombre2([dieta,keto|S],S,singular,fem).
-%nombre2([dieta,proteica|S],S,singular,fem).
-%nombre2([dieta,vegetariana|S],S,singular,fem).
-%nombre2([dieta,alcalina|S],S,singular,fem).
-%nombre2([dieta,detox|S],S,singular,fem).
 nombre2([mariscos|S],S,plural,masc).
 nombre2([vegetales|S],S,plural,masc).
 nombre2([carbohidratos|S],S,plural,masc).
@@ -138,7 +135,7 @@ nombre2([arroz|S],S,plural,masc).
 nombre2([peso|S],S,singular,masc).
 nombre2([preferencias|S],S,plural,fem).
 
-% Numero
+% Se verifica que A sea un número.
 numero([A|S],S,A):-number(A).
 
 % Frases para frecuencia de eventos
@@ -147,7 +144,6 @@ tiempo1([veces|S],S).
 tiempo1([horas|S],S).
 tiempo1([minutos|S],S).
 tiempo1([segundos|S],S).
-
 tiempo2([al,dia|S],S).
 tiempo2([a,la,semana|S],S).
 
