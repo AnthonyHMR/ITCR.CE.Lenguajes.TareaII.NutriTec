@@ -1,33 +1,35 @@
 % Posibles estructuras de una oración aceptada por el BNF
-oracion2(S0,S):-sintagma_nominal2(S0,S1,N),sintagma_verbal2(S1,S,N),!.
-oracion2(S0,S):-sintagma_nominal2(S0,S,N),!.
-oracion2(S0,S):-sintagma_verbal2(S0,S,N),!.
-oracion2(S0,S):-sintagma_verbal2(S0,S1,N),conjuncion(S1,S2),oracion2(S2,S),!.
-oracion2(S0,S):-negacion(S0,S),!.
-oracion2(S0,S):-negacion(S0,S1),oracion2(S1,S),!.
-oracion2(S0,S):-afirmacion(S0,S),!.
-oracion2(S0,S):-afirmacion(S0,S1),oracion2(S1,S),!.
-oracion2(S0,S):-agradecimiento(S0,S),!.
-oracion2(S0,S):-agradecimiento(S0,S1),oracion2(S1,S),!.
-oracion2(S0,S):-saludo(S0,S),!.
-oracion2(S0,S):-numero(S0,S).
+oracion2(S0,S,Clave):-sintagma_nominal2(S0,S1,N),sintagma_verbal2(S1,S,N,Clave),!.
+oracion2(S0,S,Clave):-sintagma_nominal2(S0,S,N,Clave),!.
+oracion2(S0,S,Clave):-sintagma_verbal2(S0,S,N),!.
+oracion2(S0,S,Clave):-sintagma_verbal2(S0,S1,N),conjuncion(S1,S2),oracion2(S2,S,Clave),!.
+oracion2(S0,S,Clave):-negacion(S0,S,Clave),!.
+oracion2(S0,S,Clave):-negacion(S0,S1),oracion2(S1,S,Clave),!.
+oracion2(S0,S,Clave):-afirmacion(S0,S),!.
+oracion2(S0,S,Clave):-afirmacion(S0,S1),oracion2(S1,S,Clave),!.
+oracion2(S0,S,Clave):-agradecimiento(S0,S),!.
+oracion2(S0,S,Clave):-agradecimiento(S0,S1),oracion2(S1,S,Clave),!.
+oracion2(S0,S,Clave):-saludo(S0,S,Clave),!.
+%oracion2(S0,S,Clave):-numero(S0,S,Clave).
+
+head2([H|_], H).
 
 % Saludos
-saludo([hola|S],S).
-saludo([hola,nutritec|S],S).
-saludo([buenas|S],S).
-saludo([buenas,nutritec|S],S).
-saludo([buenos,dias|S],S).
-saludo([buenos,dias,nutritec|S],S).
-saludo([buenas,tardes|S],S).
-saludo([buenas,tardes,nutritec|S],S).
-saludo([buenas,noches|S],S).
-saludo([buenas,noches,nutritec|S],S).
+saludo([hola|S],S,[]).
+saludo([hola,nutritec|S],S,[]).
+saludo([buenas|S],S,[]).
+saludo([buenas,nutritec|S],S,[]).
+saludo([buenos,dias|S],S,[]).
+saludo([buenos,dias,nutritec|S],S,[]).
+saludo([buenas,tardes|S],S,[]).
+saludo([buenas,tardes,nutritec|S],S,[]).
+saludo([buenas,noches|S],S,[]).
+saludo([buenas,noches,nutritec|S],S,[]).
 
 % Frases de negación
-negacion([no|S],S).
-negacion([jamas|S],S).
-negacion([nunca|S],S).
+negacion([no|S],S,no).
+negacion([jamas|S],S,no).
+negacion([nunca|S],no).
 
 % Frases de afirmación
 afirmacion([si|S],S).
@@ -37,10 +39,15 @@ afirmacion([por,supuesto|S],S).
 
 % Frases de agradecimiento
 agradecimiento([muchas,gracias|S],S).
+agradecimiento([muchas,gracias,nutritec|S],S).
 agradecimiento([ok,gracias|S],S).
+agradecimiento([ok,gracias,nutritec|S],S).
 agradecimiento([gracias|S],S).
+agradecimiento([gracias,nutritec|S],S).
 agradecimiento([lo,aprecio|S],S).
+agradecimiento([lo,aprecio,nutritec|S],S).
 agradecimiento([lo,agradezco|S],S).
+agradecimiento([lo,agradezco,nutritec|S],S).
 
 % Estructuras de sintagma nominal aceptado por BNF
 sintagma_nominal2(S0,S,N):-determinante2(S0,S1,N,SX),nombre2(S1,S,N,SX),!.
@@ -50,15 +57,16 @@ sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),nombre2(S1,S,N,SX),!.
 sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),nombre2(S1,S2,N,SX),adjetivo(S2,S),!.
 sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),numero(S1,S2),nombre2(S2,S,N,SX),!.
 sintagma_nominal2(S0,S,N):-pronombreIndet(S0,S1,N,SX),numero(S1,S),!.
-sintagma_nominal2(S0,S,N):-numero(S0,S1),tiempo1(S1,S2),tiempo2(S2,S),!.
+sintagma_nominal2(S0,S,N,Clave):-numero(S0,S1),tiempo1(S1,S2),tiempo2(S2,S),!.
 sintagma_nominal2(S0,S,N):-adjetivo(S0,S),!.
-sintagma_nominal2(S0,S,N):-enfermedad(S0,S),!.
+sintagma_nominal2(S0,S,N,Clave):-enfermedad(S0,S,Clave),!.
 sintagma_nominal2(S0,S,N):-pronombrePersonal(S0,S,N),!.
 sintagma_nominal2(S0,S,N):-pronombreReflex(S0,S,N),!.
 
+
 % Estructuras de sintagma verbal aceptado por BNF
-sintagma_verbal2(S0,S,N):-verbo2(S0,S1,N),sintagma_nominal2(S1,S,N1).
-sintagma_verbal2(S0,S,N):-verboIndicativo(S0,S1,N),verboInfinitivo(S1,S2,N),sintagma_nominal2(S2,S,N1).
+sintagma_verbal2(S0,S,N,Clave):-verbo2(S0,S1,N),sintagma_nominal2(S1,S,N1,Clave).
+sintagma_verbal2(S0,S,N,Clave):-verboIndicativo(S0,S1,N),verboInfinitivo(S1,S2,N),sintagma_nominal2(S2,S,N1,Clave).
 sintagma_verbal2(S0,S,N):-verboIndicativo(S0,S1,N),verboInfinitivo(S1,S2,N),adjetivo(S2,S).
 sintagma_verbal2(S0,S,N):-verbo2(S0,S,N).
 
@@ -89,11 +97,11 @@ determinante2([las|S],S,plural,fem).
 determinante2([los|S],S,plural,masc).
 
 % Enfermedades
-enfermedad([dislipidemia|S],S).
-enfermedad([hipercolesterolemia|S],S).
-enfermedad([desnutricion|S],S).
-enfermedad([sobrepeso|S],S).
-enfermedad([diabetes|S],S).
+enfermedad([dislipidemia|S],S,dislipidemia).
+enfermedad([hipercolesterolemia|S],S,hipercolesterolemia).
+enfermedad([desnutricion|S],S,desnutricion).
+enfermedad([sobrepeso|S],S,sobrepeso).
+enfermedad([diabetes|S],S,diabetes).
 
 % Nombres o sustantivos
 nombre2([estilo,de,vida|S],S,singular,masc).
@@ -106,6 +114,10 @@ nombre2([dieta,alcalina|S],S,singular,fem).
 nombre2([dieta,detox|S],S,singular,fem).
 nombre2([mariscos|S],S,plural,masc).
 nombre2([vegetales|S],S,plural,masc).
+nombre2([carbohidratos|S],S,plural,masc).
+nombre2([carnes|S],S,plural,masc).
+nombre2([proteinas|S],S,plural,masc).
+nombre2([arroz|S],S,plural,masc).
 nombre2([peso|S],S,singular,masc).
 nombre2([preferencias|S],S,plural,fem).
 
