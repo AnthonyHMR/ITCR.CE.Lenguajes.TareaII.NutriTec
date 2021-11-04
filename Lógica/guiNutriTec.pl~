@@ -30,16 +30,21 @@ preguntas:-
     write('¿Qué alimentos preferirías no consumir?'),nl,
     leer_frase(X5),nl,
     oracion2(X5,[], Clave),
-    validarDieta(Enfermedad, Calorias, Actividad, Tipodieta),!.
+    validarDieta(Enfermedad, Calorias, Actividad, Tipodieta),nl,!.
 
 preguntas:-
-    write('No hemos podido encontrar ninguna dieta que cumpla con la información que nos haz brindado'),!.
+    write('No hemos podido encontrar ninguna dieta que cumpla con la información que nos haz brindado'),nl,!.
 
 despedida:-
     leer_frase(X),nl,
     oracion2(X,[], Clave),
     write('Fue un gusto poder atenderle. Esperamos y nuestra recomendacion le haya servido de ayuda.').
 
+% Leer_frase es una función la cual es llamada por la función principal
+% para separar la oracion escrita en consola en una lista de
+% palabras.
+% La función recibe la entrada 'Palabras' la cual es la oración a
+% convertir en lista.
 leer_frase(Palabras):-
     get0(Caracter),
     leer_resto(Caracter,Palabras).
