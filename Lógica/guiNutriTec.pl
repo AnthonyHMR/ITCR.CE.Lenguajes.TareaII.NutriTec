@@ -40,6 +40,11 @@ despedida:-
     oracion2(X,[], Clave),
     write('Fue un gusto poder atenderle. Esperamos y nuestra recomendacion le haya servido de ayuda.').
 
+% Leer_frase es una función la cual es llamada por la función principal
+% al momento de querer escribir una oracion en consola y leer la misma
+% para separarla en una lista de palabras.
+% La función recibe la entrada 'Palabras' la cual es la oración a
+% convertir en lista.
 leer_frase(Palabras):-
     get0(Caracter),
     leer_resto(Caracter,Palabras).
