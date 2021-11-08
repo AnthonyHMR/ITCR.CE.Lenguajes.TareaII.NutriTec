@@ -8,41 +8,56 @@ play:-
 
 introduccion:-
     leer_frase(X),nl,
-    oracion2(X,[], Clave),
+    saludo(X,[], Clave),
     write('Hola encantado de verlo mejorar su estilo de vida. Cuenteme ¿en qué lo puedo ayudar?'),nl,
+    introduccion2,!.
+
+introduccion:-
+    write('No te he entendido, ¿podrías volverlo a repetir?'),nl,
+    introduccion.
+
+introduccion2:-
     leer_frase(Y),nl,
-    oracion2(Y,[], Clave).
+    oracion2(Y,[], Clave),!.
+
+introduccion2:-
+    write('No te he entendido, ¿podrías volverlo a repetir?'),nl,
+    introduccion2.
+
 
 preguntas:-
     write('Excelente iniciativa. Estamos para asesorarte en todo lo que necesites.
 ¿Tienes alguna enfermedad por la que ha iniciado este proceso?, ¿cual?'),nl,
-    leer_frase(X1),nl,
-    oracion2(X1,[], Enfermedad),
+    respuesta(Enfermedad),
     write('¿Tienes pensado una cantidad específica de calorías diarias por consumir?'),nl,
-    leer_frase(X2),nl,
-    oracion2(X2,[], Calorias),
+    respuesta(Calorias),
     write('¿Cuantas veces a la semana hace actividad física?'),nl,
-    leer_frase(X3),nl,
-    oracion2(X3,[], Actividad),
+    respuesta(Actividad),
     write('¿Tienes un tipo de dieta que te gustaría realizar?'),nl,
-    leer_frase(X4),nl,
-    oracion2(X4,[], Tipodieta),
+    respuesta(Clave),
     write('¿Qué alimentos preferirías no consumir?'),nl,
-    leer_frase(X5),nl,
-    oracion2(X5,[], Clave),
+    respuesta(Tipodieta),
     validarDieta(Enfermedad, Calorias, Actividad, Tipodieta),nl,!.
 
 preguntas:-
     write('No hemos podido encontrar ninguna dieta que cumpla con la información que nos haz brindado'),nl,!.
 
+respuesta(Clave):-
+    leer_frase(X),nl,
+    oracion2(X,[], Clave),!.
+
+respuesta(Clave):-
+    write('No te he entendido, ¿podrías volverlo a repetir?'),nl,
+    respuesta(Clave),!.
+
 despedida:-
     leer_frase(X),nl,
-    oracion2(X,[], Clave),
+    agradecimiento(X,[]),
     write('Fue un gusto poder atenderle. Esperamos y nuestra recomendacion le haya servido de ayuda.').
 
 % Leer_frase es una función la cual es llamada por la función principal
-% para separar la oracion escrita en consola en una lista de
-% palabras.
+% al momento de querer escribir una oracion en consola y leer la misma
+% para separarla en una lista de palabras.
 % La función recibe la entrada 'Palabras' la cual es la oración a
 % convertir en lista.
 leer_frase(Palabras):-
